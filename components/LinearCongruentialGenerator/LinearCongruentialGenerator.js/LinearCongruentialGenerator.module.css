@@ -194,7 +194,7 @@ background: var(--secondary-color);
   border-radius: 10px;
   min-width: 200px;
 }
-.activeNum{
+.activeNum, .invalid{
   color: var(--error-color);
 }
 @media screen and (max-width: 600px) {

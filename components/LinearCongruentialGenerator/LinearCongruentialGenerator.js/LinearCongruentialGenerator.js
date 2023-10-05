@@ -9,12 +9,16 @@ export default function LinearCongruentialGenerator() {
   const [randNumbers, setRandNumbers] = useState([]);
   const [period, setPeriod] = useState(null);
   const [showGeneratorParam, setShowGeneratorParam] = useState(false);
+  const [isValid, setIsValid] = useState(true);
   const [showDetailPeriod, setShowDetailPeriod] = useState(false);
   const [loading, setLoading] = useState(false);
   const [downloaded, setDownloaded] = useState(false);
 
  const handleSequenceLenghtChange = (event) => {
-    setSequenceLength(event.target.value);
+    const inputValue = event.target.value
+    setSequenceLength(inputValue);
+    const isValidInput = /^[0-9]*$/.test(inputValue);
+    setIsValid(isValidInput);
   };
 
   const handleGenerateRandomSequence = async () => {
@@ -69,13 +73,16 @@ export default function LinearCongruentialGenerator() {
       >Linear Congruential Pseudorandom Number Generator</h1>
       <div className={css.generatorContent}>
         <label className={css.label} htmlFor="sequenceLength">Sequence length:</label>
-        <input className={css.input} 
+        <input className={`${css.input} ${isValid ? '' : css.invalid}`} 
+            required
             type="text" 
             id="sequenceLength" 
             name="sequenceLength"
+            pattern="[0-9]*" 
             // value={sequenceLength} 
             placeholder='0'
             onChange={handleSequenceLenghtChange} />
+        {!isValid && <p className={css.invalid}>Invalid input</p>}
       </div>
       <div>
         <button  className={css.generateButton} onClick={handleGenerateRandomSequence}>
