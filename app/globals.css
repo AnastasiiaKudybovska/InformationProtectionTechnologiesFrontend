@@ -1,13 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Dancing+Script&family=IBM+Plex+Sans+Condensed:wght@600&family=Kalam:wght@300&family=Lora&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
+  --primary-color: #008577;
+  --secondary-color: #014e45;
+  /* --main-text-color: #27282b; */
+  --main-text-color: #1F2937;
+  --error-color: #D80032;
+  --grey-bg-color: #d9d9d9;
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
 }
 
+body {
+  font-family: 'IBM Plex Sans Condensed', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  color: var(--main-text-color);
+}
+/*  
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
@@ -24,4 +38,4 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
-}
+} */
