@@ -10,6 +10,7 @@ export default function LinearCongruentialGenerator() {
   const [period, setPeriod] = useState(null);
   const [showGeneratorParam, setShowGeneratorParam] = useState(false);
   const [isValid, setIsValid] = useState(true);
+  const [isMaxNum, setIsMaxNum] = useState(false);
   const [showDetailPeriod, setShowDetailPeriod] = useState(false);
   const [loading, setLoading] = useState(false);
   const [downloaded, setDownloaded] = useState(false);
@@ -19,6 +20,9 @@ export default function LinearCongruentialGenerator() {
     setSequenceLength(inputValue);
     const isValidInput = /^[0-9]*$/.test(inputValue);
     setIsValid(isValidInput);
+    if(inputValue > 100000){
+      setIsMaxNum(true)
+    }
   };
 
   const handleGenerateRandomSequence = async () => {
@@ -82,27 +86,35 @@ export default function LinearCongruentialGenerator() {
             // value={sequenceLength} 
             placeholder='0'
             onChange={handleSequenceLenghtChange} />
-        {!isValid && <p className={css.invalid}>Invalid input</p>}
+        {!isValid && <p className={css.invalid}>Invalid input! The sequence lenght can only contain positive numbers!</p>}
+        {isMaxNum && <p className={css.invalid}>Invalid input! The maximum sequence lenght is 100000!</p>}
       </div>
-      <div>
-        <button  className={css.generateButton} onClick={handleGenerateRandomSequence}>
+      <div className={css.buttonsContainer}>
+        <button  
+          disabled={!isValid || isMaxNum}
+          className={`generateButton ${css.generateButton}`} 
+          onClick={handleGenerateRandomSequence}>
           Generate Sequence
         </button>
+        {randNumbers.length !== 0 &&
+          <Link 
+              href="http://127.0.0.1:5000/write_to_file_generated_pseudo_random_sequence"
+              className={css.downoloadButton}
+              onClick={handleDownloadClick}
+              disabled={downloaded}
+              >
+              {!downloaded && 
+              <svg className={css.downoloadButtonIcon}>
+                <use className={css.icon} href={`/sprite.svg#icon-download`}></use>
+               </svg>
+               }
+              <span className={css.downoloadButtonText}> {downloaded ? "File downloaded" : "Download file"}</span>    
+            </Link> 
+        }
       </div>
       {loading ? <Loader/> : <>
       {randNumbers.length !== 0 &&
-        <div className={css.generatedSequenceWrapper}>
-          <h2 className={css.generatedSequenceHeader}>Generated Pseudorandom Sequence:</h2>
-          <div className={css.generatedSequenceNumWrapper}>  
-            {/* <p>{randNumbers.join(', ')}</p>  */}
-            <p> {randNumbers.map((number, index) => (
-                <span key={index}>
-                  <span>{number}</span>
-                  {index !== randNumbers.length - 1 && ', '}
-                </span>
-              ))}
-            </p>
-          </div>
+          <div className={css.generatedSequenceWrapper}>
           {period !== -1 &&
             <div className='flex items-center'
                 onClick={() => {setShowDetailPeriod((prev) => !prev)}}>
@@ -139,24 +151,18 @@ export default function LinearCongruentialGenerator() {
              </div>         
            </div>
           }
-          <div className='flex ml-6'>
-            <Link 
-              href="http://127.0.0.1:5000/write_to_file_generated_pseudo_random_sequence"
-              className={css.downoloadButton}
-              onClick={handleDownloadClick}
-              >
-              {!downloaded && 
-              <svg className={css.downoloadButtonIcon}>
-                <use className={css.icon} href={`/sprite.svg#icon-download`}></use>
-               </svg>
-               }
-              <span className={css.downoloadButtonText}> {downloaded ? "File downloaded" : "Download file"}</span>    
-            </Link> 
-
+          <h2 className={css.generatedSequenceHeader}>Generated Pseudorandom Sequence:</h2>
+          <div className={css.generatedSequenceNumWrapper}>  
+            {/* <p>{randNumbers.join(', ')}</p>  */}
+            <p> {randNumbers.map((number, index) => (
+                <span key={index}>
+                  <span>{number}</span>
+                  {index !== randNumbers.length - 1 && ', '}
+                </span>
+              ))}
+            </p>
           </div>
-          
 
-          
           {/* <pre>{JSON.stringify(randNumbers, null, 2)}</pre> */}
         </div>
       }</>}

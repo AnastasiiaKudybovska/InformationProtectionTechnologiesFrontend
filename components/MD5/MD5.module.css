@@ -1,0 +1,245 @@
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Dancing+Script&family=IBM+Plex+Sans+Condensed:wght@600&family=Kalam:wght@300&family=Lora&display=swap');
+
+.generatorWrapper{
+  margin: 30px 42px 36px 42px;  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  /* gap: 48px;  */
+  /* border: 1px solid;
+  border-radius: 14px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; */
+} 
+.mainWrapper{
+   text-align: center;
+}
+.title{ 
+  padding-top: 36px;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+.title:hover{
+  color: var(--primary-color);
+}
+.generatorContent{
+  border-radius: 14px;
+  display: flex;
+  align-items: flex-start;
+  /* align-items: center; */
+  flex-direction: row;
+  /* gap: 56px; */
+  margin-top: 48px;
+}
+.inputWrapper{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  border: 1px solid var(--primary-color);
+  border-radius: 14px;
+  padding: 32px 42px 24px 42px;
+  /* box-shadow: rgba(33, 35, 38, 0.1) 0px 20px 20px -20px; */
+  min-width: 500px;
+  min-height: 210px;
+  box-shadow: rgba(0, 0, 0, 0.1) -4px 9px 25px -6px;
+  background-color: #fff;
+  /* box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;  */
+}
+.input{
+  padding: 4px 8px;
+  border-radius: 14px;
+  color: var(--primary-color);
+  font-size: 24px;
+  border: 1px solid var(--borders--color);
+  min-width: 462px;
+  max-width: 530px;
+  max-height: 200px;
+  height: 50px;
+  min-height: 50px;
+  resize: vertical;
+}
+.input:hover{
+  background-color: #0085783a;
+  border: 1px solid var(--primary-color);
+}
+.input:focus, .input:active,
+.uploadFile:focus, .uploadFile:active{
+  outline: none; 
+  border: 1px solid var(--primary-color);
+}
+.input:focus, .input:active{
+  background-color: transparent !important;  
+}
+/* .input{
+  margin-bottom: 36px;
+  padding: 24px;
+} */
+.input::-webkit-scrollbar{
+  width: 6px;
+}
+.input::-webkit-scrollbar-track {
+background-color: transparent;
+-webkit-border-radius: 14px;
+border-radius: 14px;
+}
+.input::-webkit-scrollbar-thumb{
+-webkit-border-radius: 14px;
+border-radius:14px;
+background: var(--borders--color); 
+} 
+
+.label{
+  font-size: 26px;
+  font-family: 'IBM Plex Sans Condensed', sans-serif;
+  font-weight: 500;
+  color: var(--main-text-color);
+}
+.help{
+  display: none;
+}
+.uploadFile{
+  padding: 4px 8px;
+  border-radius: 14px;
+  background-color: var(--grey-bg-color);
+  font-size: 20px;
+  border: 1px solid var(--borders--color);
+  min-width: 462px;
+  height: 50px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.disabledUploadFile{
+  background-color: rgba(239, 239, 239, 0.3) !important;
+  cursor:  default;
+}
+.uploadFile:hover{
+  border: 1px solid var(--primary-color);
+  background-color: #0085783a;
+}
+.disabledUploadFile:focus, .disabledUploadFile:active,
+.disabledInp:focus, .disabledInp:active{
+  border: 1px solid var(--borders--color);
+}
+.selectedFile{
+  padding-top: 8px;
+  font-size: 18px;
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+.clearText{
+  padding-top: -8px;
+  font-size: 18px;
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+.cancelButtonIcon{
+  display: inline-block;
+  width:  10px;
+  height: 10px;
+  margin-right: 4px;
+  stroke-width: 0;
+  stroke: var(--error-color);
+  fill: currentColor;
+}
+.uploadFileButtonIcon{
+  display: inline-block;
+  width:  20px;
+  height: 20px;
+  margin-right: 4px;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+}
+.hashWrapper{
+  margin-top: 48px;
+}
+.downoloadButton{
+  border-radius: 10px;
+  color: white;
+  font-size: 18px;
+  background-color: var(--primary-color);
+  text-align: center;
+  display: inline-flex;
+  padding: 12px 36px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+.downoloadButton:hover{
+  background-color: var(--secondary-color);
+}
+.downoloadButtonIcon, .detailsIcon {
+  display: inline-block;
+  width: 1.25em;
+  height: 1.25em;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+}
+.detailsIcon{
+  margin-right: 10px;
+}
+.detailPeriodWrapper{
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+  gap: 64px;
+}
+.detailPeriodBox{
+  border: 1px solid var(--primary-color);
+  padding: 16px;
+  border-radius: 10px;
+  min-width: 200px;
+}
+.activeNum, .invalid{
+  color: var(--error-color);
+}
+.buttonsContainer{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 48px;
+  margin-top: 48px;
+
+}
+.centerCont{
+    margin-left: 0 !important;
+}
+
+.buttonsContainer .generateButton,
+.buttonsContainer .downoloadButton{
+  /* flex: 1;  */
+/* /z */
+  margin: 0; 
+}
+.check{
+  color: var(--primary-color);
+}
+.inpHash{
+  min-width: 760px !important
+}
+.checkButt::after{
+  background-color: var(--secondary-color) !important;
+}
+@media screen and (max-width: 600px) {
+  .downoloadButton{
+    width: 100%;
+  }
+  .generatorWrapper{
+    padding: 0 36px 35px 36px;
+  }
+  .detailPeriodWrapper{
+    flex-direction: column;
+  }
+}

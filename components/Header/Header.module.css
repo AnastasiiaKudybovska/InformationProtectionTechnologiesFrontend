@@ -18,4 +18,18 @@
     fill: currentColor;
     margin-right: 16px;
 }
-
+.headerWrapper{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.link{
+  font-size: 22px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 32px;
+  /* font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; */
+  font-style: italic;
+}
