@@ -19,6 +19,7 @@ body {
   font-size: 18px;
   color: var(--main-text-color);
   background-color: #00857806;
+  /* background-color: #252525; */
 }
 
 .generateButton {
