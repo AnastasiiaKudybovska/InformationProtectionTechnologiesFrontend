@@ -13,8 +13,9 @@ export default function Header() {
         </Link>
         <div className={css.link}>
           <Link href="/">Linear Congruential Generator</Link>
-          <Link href="/md5">MD5 Hash Generator</Link>
-          <Link href="/rc5">RC5 Encryption and Decryption</Link>
+          <Link href="/md5">MD5</Link>  {/* Hash Generator */}
+          <Link href="/rc5">RC5</Link> {/* Encryption and Decryption */}
+          <Link href="/rsa">RSA</Link> {/* Encryption and Decryption */}
         </div>
       </div>
      

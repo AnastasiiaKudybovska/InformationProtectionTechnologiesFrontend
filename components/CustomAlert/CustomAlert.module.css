@@ -1,0 +1,55 @@
+.customAlert {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 20px 48px;
+    border-radius: 8px;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    animation: showAlertAnimation 0.1s ease-in-out forwards;
+    font-size: 14px;
+    display: flex;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset,
+    rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset,
+    rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px,
+    rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px,
+    rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+  }
+  .timerWrapper {
+    height: 5px;
+    background-color:  #fff;
+    border-bottom-right-radius: 8px;
+    border-top-right-radius: 8px;
+    border-bottom-left-radius: 20px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transition: width 0.1s ease-in-out;
+  }
+  .alertContent {
+    display: flex;
+    align-items: center;
+  }
+
+  .message {
+    flex: 1;
+  }
+  .error{
+    background-color: var(--error-color);
+    color: #fff;
+  }
+  .success{
+    background-color:  var(--primary-color);
+    color: #fff;
+  }
+
+  @keyframes showAlertAnimation {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  

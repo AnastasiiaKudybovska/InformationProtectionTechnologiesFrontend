@@ -10,13 +10,17 @@ export default function RC5() {
   const [isValidText, setIsValidText] = useState(true);
   const [isValidFile, setIsValidFile] = useState(true);
   const [selectedFile, setSelectedFile] = useState(null);
+  const [encryptedTextTime, setEncryptedTextTime] = useState("");
+  const [encryptedFileTime, setEncryptedFileTime] = useState("");
 
   const [keyDecrypt, setKeyDecrypt] = useState("");
   const [stringForDecrypt, setStringForDecrypt] = useState("");  
   const [isValidDecryptText, setIsValidDecryptText] = useState(true);
   const [isValidDecryptFile, setIsValidDecryptFile] = useState(true);
   const [selectedDecryptFile, setSelectedDecryptFile] = useState(null);
-  
+  const [decryptedTextTime, setDecryptedTextTime] = useState("");
+  const [decryptedFileTime, setDecryptedFileTime] = useState("");
+
   const [result, setResult] = useState("");
 
 
@@ -35,17 +39,29 @@ export default function RC5() {
     const inputValue = event.target.value
     setKeyEncrypt(inputValue);
     setResult('');
+    setDecryptedTextTime('');
+    setDecryptedFileTime('');
+    setEncryptedTextTime('');
+    setEncryptedFileTime('');
   };
   const handlekeyDecryptChange = (event) => {
     const inputValue = event.target.value
     setKeyDecrypt(inputValue);
     setResult('');
+    setDecryptedTextTime('');
+    setDecryptedFileTime('');
+    setEncryptedTextTime('');
+    setEncryptedFileTime('');
   };
 
   const handleStringForHashChange = (event) => {
     const inputValue = event.target.value
     setStringForHash(inputValue);
     setResult('');
+    setDecryptedTextTime('');
+    setDecryptedFileTime('');
+    setEncryptedTextTime('');
+    setEncryptedFileTime('');
     if(inputValue.length > 100000){
       setIsValidText(false)
     } else {
@@ -56,6 +72,10 @@ export default function RC5() {
     const inputValue = event.target.value
     setStringForDecrypt(inputValue);
     setResult('');
+    setDecryptedTextTime('');
+    setDecryptedFileTime('');
+    setEncryptedTextTime('');
+    setEncryptedFileTime('');
     if(inputValue.length > 100000){
       setIsValidDecryptText(false)
     } else {
@@ -67,6 +87,10 @@ export default function RC5() {
     const file = e.target.files[0];
     setSelectedFile(file); 
     setResult('');
+    setDecryptedTextTime('');
+    setDecryptedFileTime('');
+    setEncryptedTextTime('');
+    setEncryptedFileTime('');
     const MAX_FILE_SIZE = 300 * 1024 * 1024;
     if (file && file.size > MAX_FILE_SIZE) {
       setIsValidFile(false)
@@ -78,6 +102,10 @@ export default function RC5() {
     const file = e.target.files[0];
     setSelectedDecryptFile(file); 
     setResult('');
+    setDecryptedTextTime('');
+    setDecryptedFileTime('');
+    setEncryptedTextTime('');
+    setEncryptedFileTime('');
     const MAX_FILE_SIZE = 300 * 1024 * 1024;
     if (file && file.size > MAX_FILE_SIZE) {
       setIsValidDecryptFile(false)
@@ -96,7 +124,9 @@ export default function RC5() {
           text: stringForHash
         });
         // console.log((response.data))
-        setResult(response.data);
+        // setResult(response.data);
+        setResult(response.data.encrypted_text);
+        setEncryptedTextTime(response.data.encryption_time)
         if (!stringForHash) setResHashInp('epmty_text');
         else {setResHashInp('text');}
       } catch (error) {
@@ -117,7 +147,7 @@ export default function RC5() {
             'Content-Type': 'multipart/form-data'
           },
           responseType: 'blob' 
-        }).then(response => {
+        }).then(async response => {
           console.log(response)
 
           const url = window.URL.createObjectURL(new Blob([response.data]));
@@ -129,6 +159,8 @@ export default function RC5() {
           link.setAttribute('download', 'code_' + selectedFile.name);
           
           document.body.appendChild(link);
+          const response_time = await axios.get('http://127.0.0.1:5000/rc5_crypt_file_time');
+          setEncryptedFileTime(response_time.data);
           link.click();
           window.URL.revokeObjectURL(url);
         });
@@ -154,7 +186,9 @@ export default function RC5() {
           text: stringForDecrypt
         });
         // console.log((response.data))
-        setResult(response.data);
+        // setResult(response.data);
+        setResult(response.data.decrypted_text);
+        setDecryptedTextTime(response.data.decryption_time)
       } catch (error) {
         console.error('There was a problem with the Axios request:', error);
       } finally {
@@ -181,6 +215,8 @@ export default function RC5() {
         
         link.setAttribute('download', 'encode_' + selectedDecryptFile.name);
         document.body.appendChild(link);
+        const response_time = await axios.get('http://127.0.0.1:5000/rc5_crypt_file_time');
+        setDecryptedFileTime(response_time.data);
         link.click();
         window.URL.revokeObjectURL(url);
         
@@ -270,7 +306,7 @@ export default function RC5() {
                 </>              
               )}
             </div>
-              {stringForHash && !isValidText && <p className={css.invalid}>Error! The maximum sequence lenght is 100000!</p>}     
+              {stringForHash && !isValidText && <p className={css.invalid}>Error! The maximum sequence length is 100000!</p>}     
             </div>
             </div>
             <div className={css.InpBox}>
@@ -399,7 +435,7 @@ export default function RC5() {
                 </>              
               )}
             </div>
-              {stringForDecrypt && !isValidDecryptText && <p className={css.invalid}>Error! The maximum sequence lenght is 100000!</p>}     
+              {stringForDecrypt && !isValidDecryptText && <p className={css.invalid}>Error! The maximum sequence length is 100000!</p>}     
             </div>
             </div>
             <div className={css.InpBox}>
@@ -497,14 +533,49 @@ export default function RC5() {
       {loading && <Loader/> }
       {result.length !== 0 &&
       <div className='mt-[48px]'>
+        <div>
         <b className={css.label}>Result:</b>
-        <div className={css.resWrapper}>
-          
+        <div className={css.resWrapper}>       
           <p> 
             {' '}{result}
           </p>
         </div>  
+        </div>
+        {(encryptedTextTime || decryptedTextTime) &&
+        <div className='pt-[36px]'>
+        <b className={`${css.label}`}>RC5 encrypt time: </b>
+        <div className={css.resWrapper}>
+          <p className={css.resWrapperP}> 
+            {' '}{encryptedTextTime === '' && decryptedTextTime !== '' ? decryptedTextTime : encryptedTextTime}{' '}seconds
+          </p>
+        </div>  
+        </div> 
+}
       </div>
+      }
+       {encryptedFileTime.length !== 0 &&
+       <div className='mt-[48px]'>
+       <div>
+       <b className={`${css.label}`}>RC5 time: </b>
+       <div className={css.resWrapper}>
+         <p> 
+           {' '}{encryptedFileTime}{' '}seconds
+         </p>
+       </div>  
+       </div>
+     </div>
+      }
+       {decryptedFileTime.length !== 0 &&
+       <div className='mt-[48px]'>
+       <div>
+       <b className={`${css.label}`}>RC5 time: </b>
+       <div className={css.resWrapper}>
+         <p> 
+           {' '}{decryptedFileTime}{' '}seconds
+         </p>
+       </div>  
+       </div>
+     </div>
       }
     </div>
   );
