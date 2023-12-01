@@ -17,7 +17,6 @@ export default function RSA() {
 
   const [isValidFileEncrypt, setIsValidFileEncrypt] = useState(false);
   const [fileEncrypt, setFileEncrypt] = useState(null);
-
   
   const [privateKey, setPrivateKey] = useState(null);
   const [textDecrypt, setTextDecrypt] = useState("");  
@@ -48,12 +47,6 @@ export default function RSA() {
     setDecryptedText('');
     setDecryptedTextTime('');
     setDecryptedFileTime('');
-    // const MAX_FILE_SIZE = 300 * 1024 * 1024;
-    // if (file && file.size > MAX_FILE_SIZE) {
-    //   setIsValidFileEncrypt(false)
-    // } else{
-    //   setIsValidFileEncrypt(true)
-    // }
   };
 
   const handleTextEncryptChange = (event) => {
@@ -98,12 +91,6 @@ export default function RSA() {
     setEncryptedFileTime('');
     setDecryptedTextTime('');
     setDecryptedFileTime('');
-    // const MAX_FILE_SIZE = 300 * 1024 * 1024;
-    // if (file && file.size > MAX_FILE_SIZE) {
-    //   setIsValidFileEncrypt(false)
-    // } else{
-    //   setIsValidFileEncrypt(true)
-    // }
   };
 
   const handleFileDecryptChange = (e) => {
@@ -266,7 +253,6 @@ export default function RSA() {
         <h1 className={css.title}>RSA Key Generator</h1>
       <div className={css.generatorContent}>
         <div className={css.inputWrapperKey}>
-          {/* <p className={css.label}>RSA Key Generator</p> */}
             <div className={css.InpBox}>
              <div className={css.InpBoxSelectOne}>
               <label className={`${css.paramLabelSlect} ${css.label}`} htmlFor='keyEncrypt'>Key Length:</label>
