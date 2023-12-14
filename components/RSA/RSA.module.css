@@ -236,6 +236,12 @@ background: var(--borders--color);
   stroke: currentColor;
   fill: currentColor;
 }
+.DSARes{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 .resWrapper{
   margin-top: 14px;
   width: 1350px;
@@ -246,6 +252,17 @@ background: var(--borders--color);
   max-height: 600px;
   overflow-x: hidden; 
   align-items: flex-start;
+}
+.resWrapperDSA{
+  margin-top: 14px;
+  width: 1350px;
+  word-wrap: break-word !important;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-height: 600px;
+  overflow-x: hidden; 
+  align-items: center;
 }
 .resWrapperP{
     word-wrap: break-word !important;

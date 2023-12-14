@@ -16,6 +16,7 @@ export default function Header() {
           <Link href="/md5">MD5</Link>  {/* Hash Generator */}
           <Link href="/rc5">RC5</Link> {/* Encryption and Decryption */}
           <Link href="/rsa">RSA</Link> {/* Encryption and Decryption */}
+          <Link href="/dsa">DSA</Link>
         </div>
       </div>
      
